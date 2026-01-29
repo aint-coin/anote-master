@@ -15,12 +15,19 @@ type Config struct {
 // Load method loads configuration file to Config struct
 func (c *Config) load(configFile string) {
 	file, err := os.Open(configFile)
-	defer file.Close()
 
 	if err != nil {
 		log.Println(err)
 		logTelegram(err.Error())
+
+		file, err = os.Open("/persistent/anote-master.config.json")
+		if err != nil {
+			log.Println(err)
+			logTelegram(err.Error())
+		}
 	}
+
+	defer file.Close()
 
 	decoder := json.NewDecoder(file)
 

@@ -603,7 +603,7 @@ func getCallerInfo() (info string) {
 func logTelegram(message string) {
 	message = "anote-master:" + getCallerInfo() + url.PathEscape(url.QueryEscape(message))
 
-	resp, err := http.Get(fmt.Sprintf("http://localhost:5002/log/%s", message))
+	resp, err := http.Get(fmt.Sprintf("http://anote-robot:5006/log/%s", message))
 	if err != nil {
 		log.Println(err)
 		return
